@@ -1,56 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import DatasetInput from './dataset-input';
 import './App.css';
 
 class App extends React.Component {
   constructor(props){
     super(props);
-    
+
     this.state ={
-      searchArr : [89,30,25,32,72,70,51,42,25,24],
-      counter: 0,
-      value: null
+      searchArr : [89,30,25,32,72,70,51,42,25,24,53,55,78,50,13,40,48,32,26,2,14,33,45,72,56,44,21,88,27,68,15,62,93,98,73,28,16,46,87,28,65,38,67,16,85,63,23,69,64,91,9,70,81,27,97,82,6,88,3,7,46,13,11,64,76,31,26,38,28,13,17,69,90,1,6,7,64,43,9,73,80,98,46,27,22,87,49,83,6,39,42,51,54,84,34,53,78,40,14,5]
     };
   }
 
-  addDataset(value){
+  addSearchValue(value){
     this.setState({
       value
     });
-  }
-
-  linearSearch(arr, value){
-    let counter =0;
-    for(let i =0; i<arr.length; i++){
-      counter ++;
-      if(value === arr[i]){
-        return `We found ${value} after ${counter} tries using linear search`
-      }
-    }
-    return `We could not find ${value}`
-  }
-
-
-
-  binarySearch(arr, value, start, end){
-    const sortedArray = arr.sort();
-    if(start>end){
-      return `Could not find ${value} in dataset`
-    }
-    let index = Math.floor((start+end)/2);
-    let item = sortedArray[index];
-
-    if(item === value){
-      return index;
-    }
-
-    else if(item < value){
-      return binarySearch(sortedArray, value, index+1, end);
-    }
-    else if(item > value){
-      return binarySearch(sortedArray, value, start, index-1);
-    }
-
   }
 
   render() {
@@ -61,7 +25,11 @@ class App extends React.Component {
         <header className="App-header">
         </header>
         <main>
-          <DatasetInput />
+          <DatasetInput
+            addSearchValue={(value)=>this.addSearchValue(value)}
+            searchArr={this.state.searchArr}
+            value={this.state.value}
+          />
         </main>
       </div>
     );
